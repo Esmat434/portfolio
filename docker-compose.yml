@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql
+    ports:
+      - 3309:3306
+    env_file:
+      - ./.env
+    volumes:
+      - mysql_volume:/var/lib/mysql
+    restart: unless-stopped
+  
+  backend:
+    build: .
+    image: portfolio
+    container_name: portfolio
+    command: ["gunicorn", "portfolio.wsgi:application", "--bind", "0.0.0.0:8000"]
+    ports:
+     - 8000:8000
+    volumes:
+      - static_volume:/src/app/static
+      - media_volume:/src/app/media
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+    restart: unless-stopped 
+  
+  nginx:
+    build: ./nginx
+    image: nginx
+    container_name: nginx
+    ports:
+      - 8090:80
+    volumes:
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media
+    env_file:
+      - ./.env
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  mysql_volume:
+  static_volume:
+  media_volume:
