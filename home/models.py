@@ -50,7 +50,7 @@ class Algorithm(models.Model):
     class Meta:
         verbose_name = 'Algorithm'
         verbose_name_plural = 'Algorithms'
-        ordering = ['-created_at']
+        ordering = ['created_at']
     
     def __str__(self):
         return f'Title {self.title}'
