@@ -60,3 +60,13 @@ Make sure you have installed:
    docker-compose up --build -d
 
 http://localhost   
+
+##📬 Contact
+
+If you want to get in touch with me:
+
+Email: hadelesmatullah@gmail.com
+
+LinkedIn: [Esmatullah Hadel](https://www.linkedin.com/in/esmatullah-hadel-682161279)
+
+GitHub: [social-media-app](https://github.com/Esmat434/social-media-app)
